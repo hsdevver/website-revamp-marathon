@@ -1106,7 +1106,7 @@ a {
 
 .solution-article__bullet {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
   margin: 0;
   padding: 0;
@@ -1120,6 +1120,8 @@ a {
   width: 24px;
   height: 24px;
   display: block;
+  /* Center arrow on first line cap height (line-height × font-size), not whole block */
+  margin-top: calc((1.3em - 24px) / 2);
 }
 
 .solution-article__bullet-label {
@@ -2766,6 +2768,14 @@ section.panel.panel--bottom.how {
 /* Platform articles: eyebrow lives in .solution-article__copy so it aligns with body copy */
 .platform-articles .solution-article--eyebrow-end .solution-article__grid {
   align-items: flex-end;
+}
+
+.platform-articles .solution-article__bullets {
+  cursor: default;
+}
+
+.platform-articles .solution-article__bullet--hover .solution-article__bullet-label {
+  color: var(--midnight);
 }
 
 .solution-article__media--single {
