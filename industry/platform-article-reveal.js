@@ -1,14 +1,15 @@
 (function () {
-  var root = document.querySelector("section.panel.panel--bottom.how");
-  var steps = root ? root.querySelectorAll("article.step") : document.querySelectorAll(".how article.step");
-  if (!steps.length) return;
+  document.documentElement.classList.add("platform-reveal-ready");
 
-  function revealStep(step) {
-    step.classList.add("step--visible");
+  var blocks = document.querySelectorAll(".platform-articles .solution-article__inner");
+  if (!blocks.length) return;
+
+  function reveal(block) {
+    block.classList.add("solution-article__inner--visible");
   }
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    steps.forEach(revealStep);
+    blocks.forEach(reveal);
     return;
   }
 
@@ -16,17 +17,16 @@
     return (window.innerHeight || document.documentElement.clientHeight) * 0.65;
   }
 
-  /** Activate when the step’s top edge reaches or passes 65% from the top of the viewport. */
-  function shouldReveal(step) {
-    if (step.classList.contains("step--visible")) return false;
-    var r = step.getBoundingClientRect();
+  function shouldReveal(block) {
+    if (block.classList.contains("solution-article__inner--visible")) return false;
+    var r = block.getBoundingClientRect();
     var y = viewportRevealY();
     return r.top <= y && r.bottom > 0;
   }
 
-  function syncSteps() {
-    steps.forEach(function (step) {
-      if (shouldReveal(step)) revealStep(step);
+  function syncBlocks() {
+    blocks.forEach(function (block) {
+      if (shouldReveal(block)) reveal(block);
     });
   }
 
@@ -36,7 +36,7 @@
     ticking = true;
     requestAnimationFrame(function () {
       ticking = false;
-      syncSteps();
+      syncBlocks();
     });
   }
 
@@ -46,12 +46,12 @@
   window.addEventListener(
     "load",
     function () {
-      syncSteps();
+      syncBlocks();
     },
     { passive: true }
   );
 
   requestAnimationFrame(function () {
-    requestAnimationFrame(syncSteps);
+    requestAnimationFrame(syncBlocks);
   });
 })();
