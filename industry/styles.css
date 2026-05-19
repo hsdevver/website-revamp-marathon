@@ -3283,13 +3283,19 @@ section.panel.panel--bottom.how {
   flex-wrap: wrap;
   gap: 56px;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
   max-width: 1272px;
   margin: 0 auto;
 }
 
+.solution-why__inner.wrap {
+  padding-inline: 0;
+}
+
 .solution-why__intro {
-  flex: 1 1 320px;
+  flex: 0 0 548px;
+  width: min(548px, 100%);
   max-width: 548px;
 }
 
@@ -3312,6 +3318,7 @@ section.panel.panel--bottom.how {
   position: relative;
   flex: 1 1 400px;
   max-width: 668px;
+  margin-left: auto;
   isolation: isolate;
 }
 
